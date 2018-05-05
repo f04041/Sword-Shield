@@ -3,13 +3,13 @@
   "modid": "f0_ss",
   "name": "Sword&Shield",
   "description": "Add a Sword&Shield",
-  "version": "0.0.1ƒ¿",
+  "version": "0.1.0",
   "mcversion": "1.12",
-  "url": "",
+  "url": "https://minecraft.curseforge.com/projects/sword-shield",
   "updateUrl": "",
   "authorList": ["f04041"],
   "credits": "f04041",
-  "logoFile": "",
+  "logoFile": "SwordShield.png",
   "screenshots": [],
   "dependencies": []
 }

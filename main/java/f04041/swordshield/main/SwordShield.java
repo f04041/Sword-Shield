@@ -14,11 +14,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = "f0_ss",
 	name = "Sword&Shield",
-	version = "0.0.1",
+	version = "0.1.0",
 	dependencies = "required-after:forge",
 	acceptedMinecraftVersions = "[1.12,1.12.2]",
 	useMetadata = true)
 public class SwordShield {
+	private CommonProxy proxy= new CommonProxy();
 	public final static String MOD_ID = "f0_ss";
 	private static final NonNullList<Item> ITEMS = NonNullList.create();
 	@Mod.Instance("f0_ss")
@@ -34,7 +35,7 @@ public class SwordShield {
 	}
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-
+		proxy.loadInit();
 	}
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event){

@@ -12,8 +12,11 @@ import net.minecraft.world.World;
 abstract public class IShieldAbstract extends ItemShieldCore{
 	private Item sword;
 	private Item shield;
-	public IShieldAbstract(ToolMaterial material){
+	private float decay;
+	private boolean projectileReflect=false;
+	public IShieldAbstract(ToolMaterial material,float decay){
 		super(material);
+		this.decay=decay;
 		this.setMaxDamage(1000);
 	}
 	@Override
@@ -86,4 +89,13 @@ abstract public class IShieldAbstract extends ItemShieldCore{
 		entityItem.setDead();
         return false;
     }
+	public float getDecay(){
+		return decay;
+	}
+	public void setProjectileReflect(boolean reflect){
+		this.projectileReflect=reflect;
+	}
+	public boolean getProjectileReflect(){
+		return this.projectileReflect;
+	}
 }
