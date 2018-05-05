@@ -1,0 +1,26 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "f0_ss:item/sshieldm"
+    },
+    "display": {
+    	"thirdperson_lefthand": {
+            "rotation": [ 0, 90, 0 ],
+            "translation": [ 3, -1, 4 ],
+            "scale": [ 1.5, 1.5, 1.5 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 0, 180, 5 ],
+            "translation": [ 10, -7, -10 ],
+            "scale": [ 2, 2, 2 ]
+        }
+    },
+    "overrides": [
+                  {
+                      "predicate": {
+                          "blocking": 1
+                      },
+                      "model":"f0_ss:item/sshieldmb"
+                  }
+              ]
+}

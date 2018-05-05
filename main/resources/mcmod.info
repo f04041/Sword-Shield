@@ -1,0 +1,16 @@
+[
+{
+  "modid": "f0_ss",
+  "name": "Sword&Shield",
+  "description": "Add a Sword&Shield",
+  "version": "0.0.1ƒ¿",
+  "mcversion": "1.12",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["f04041"],
+  "credits": "f04041",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
