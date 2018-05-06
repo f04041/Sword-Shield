@@ -54,6 +54,25 @@ abstract public class ISwordAbstract extends ItemSword{
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
+		work(stack,worldIn,entityIn);
+    }
+	public void setShield(Item shield){
+		this.shield=shield;
+	}
+	@Override
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
+    {
+        Multimap<String, AttributeModifier> multimap = HashMultimap.<String, AttributeModifier>create();
+
+        if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+        {
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.attackDamage, 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeed, 0));
+        }
+
+        return multimap;
+    }
+	public void work(ItemStack stack, World worldIn, Entity entityIn){
 		if(entityIn instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer) entityIn;
 			NBTTagCompound nbtSword=stack.getTagCompound();//メインハンドのアイテムに持たせるkey要素
@@ -103,21 +122,5 @@ abstract public class ISwordAbstract extends ItemSword{
 				}
 			}
 		}
-    }
-	public void setShield(Item shield){
-		this.shield=shield;
 	}
-	@Override
-	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
-    {
-        Multimap<String, AttributeModifier> multimap = HashMultimap.<String, AttributeModifier>create();
-
-        if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
-        {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.attackDamage, 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeed, 0));
-        }
-
-        return multimap;
-    }
 }

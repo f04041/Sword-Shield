@@ -22,6 +22,46 @@ abstract public class IShieldAbstract extends ItemShieldCore{
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
+		work(stack,worldIn,entityIn,itemSlot);
+    }
+	public void delShield(ItemStack shiled,EntityPlayer player){
+		NBTTagCompound nbtShield = shiled.getTagCompound();
+		if(nbtShield.hasKey("inner")){
+			ItemStack innerItem =new ItemStack((NBTTagCompound) nbtShield.getTag("inner"));
+			player.setHeldItem(EnumHand.OFF_HAND, innerItem);
+		}else{
+			shiled.shrink(1);
+		}
+	}
+	public void setSwordShield(Item sword,Item shield){
+		this.sword=sword;
+		this.shield=shield;
+	}
+	@Override
+	public boolean onEntityItemUpdate(net.minecraft.entity.item.EntityItem entityItem)
+    {
+		ItemStack shield=entityItem.getItem();
+		NBTTagCompound nbtShield = shield.getTagCompound();
+		if(nbtShield!=null&&nbtShield.hasKey("inner")){
+			ItemStack innerItem = new ItemStack((NBTTagCompound) nbtShield.getTag("inner"));
+			EntityItem inner = new EntityItem(entityItem.world,entityItem.posX,entityItem.posY,entityItem.posZ,innerItem);
+			if(!entityItem.world.isRemote){
+				entityItem.world.spawnEntity(inner);
+			}
+		}
+		entityItem.setDead();
+        return false;
+    }
+	public float getDecay(){
+		return decay;
+	}
+	public void setProjectileReflect(boolean reflect){
+		this.projectileReflect=reflect;
+	}
+	public boolean getProjectileReflect(){
+		return this.projectileReflect;
+	}
+	public void work(ItemStack stack, World worldIn, Entity entityIn, int itemSlot){
 		if(entityIn instanceof EntityPlayer){
 			NBTTagCompound nbtShield = stack.getTagCompound();
 			EntityPlayer player=(EntityPlayer) entityIn;
@@ -60,42 +100,5 @@ abstract public class IShieldAbstract extends ItemShieldCore{
 				}
 			}
 		}
-    }
-	public void delShield(ItemStack shiled,EntityPlayer player){
-		NBTTagCompound nbtShield = shiled.getTagCompound();
-		if(nbtShield.hasKey("inner")){
-			ItemStack innerItem =new ItemStack((NBTTagCompound) nbtShield.getTag("inner"));
-			player.setHeldItem(EnumHand.OFF_HAND, innerItem);
-		}else{
-			shiled.shrink(1);
-		}
-	}
-	public void setSwordShield(Item sword,Item shield){
-		this.sword=sword;
-		this.shield=shield;
-	}
-	@Override
-	public boolean onEntityItemUpdate(net.minecraft.entity.item.EntityItem entityItem)
-    {
-		ItemStack shield=entityItem.getItem();
-		NBTTagCompound nbtShield = shield.getTagCompound();
-		if(nbtShield!=null&&nbtShield.hasKey("inner")){
-			ItemStack innerItem = new ItemStack((NBTTagCompound) nbtShield.getTag("inner"));
-			EntityItem inner = new EntityItem(entityItem.world,entityItem.posX,entityItem.posY,entityItem.posZ,innerItem);
-			if(!entityItem.world.isRemote){
-				entityItem.world.spawnEntity(inner);
-			}
-		}
-		entityItem.setDead();
-        return false;
-    }
-	public float getDecay(){
-		return decay;
-	}
-	public void setProjectileReflect(boolean reflect){
-		this.projectileReflect=reflect;
-	}
-	public boolean getProjectileReflect(){
-		return this.projectileReflect;
 	}
 }
