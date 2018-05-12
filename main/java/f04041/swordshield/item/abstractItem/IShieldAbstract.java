@@ -21,9 +21,9 @@ abstract public class IShieldAbstract extends ItemShieldCore{
 	}
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-    {
+	{
 		work(stack,worldIn,entityIn,itemSlot);
-    }
+	}
 	public void delShield(ItemStack shiled,EntityPlayer player){
 		NBTTagCompound nbtShield = shiled.getTagCompound();
 		if(nbtShield.hasKey("inner")){
@@ -39,7 +39,7 @@ abstract public class IShieldAbstract extends ItemShieldCore{
 	}
 	@Override
 	public boolean onEntityItemUpdate(net.minecraft.entity.item.EntityItem entityItem)
-    {
+	{
 		ItemStack shield=entityItem.getItem();
 		NBTTagCompound nbtShield = shield.getTagCompound();
 		if(nbtShield!=null&&nbtShield.hasKey("inner")){
@@ -50,16 +50,21 @@ abstract public class IShieldAbstract extends ItemShieldCore{
 			}
 		}
 		entityItem.setDead();
-        return false;
-    }
+		return false;
+	}
 	public float getDecay(){
 		return decay;
 	}
-	public void setProjectileReflect(boolean reflect){
-		this.projectileReflect=reflect;
+	public void setProjectileReflect(ItemStack stack,boolean reflect){
+		NBTTagCompound nbtShield = stack.getTagCompound();
+			nbtShield.setBoolean("reflect", reflect);
 	}
-	public boolean getProjectileReflect(){
-		return this.projectileReflect;
+	public boolean getProjectileReflect(ItemStack stack){
+		NBTTagCompound nbtShield = stack.getTagCompound();
+		if(!nbtShield.hasKey("reflect")) {
+			nbtShield.setBoolean("reflect", false);
+		}
+		return nbtShield.getBoolean("reflect");
 	}
 	public void work(ItemStack stack, World worldIn, Entity entityIn, int itemSlot){
 		if(entityIn instanceof EntityPlayer){

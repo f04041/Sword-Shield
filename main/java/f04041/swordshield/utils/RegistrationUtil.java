@@ -8,6 +8,8 @@ public class RegistrationUtil {
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event){
 		IForgeRegistry<Item> registry =event.getRegistry();
+		registry.register(ItemUtil.sSwordS);
+		registry.register(ItemUtil.sShieldS);
 		registry.register(ItemUtil.sShieldM);
 		registry.register(ItemUtil.sSwordM);
 	}

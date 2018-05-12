@@ -1,7 +1,6 @@
 package f04041.swordshield.main.recipe;
 
 import f04041.swordshield.utils.ItemUtil;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -14,14 +13,24 @@ public class CraftingRecipe {
 	@SubscribeEvent
 	public void registerRecipe(RegistryEvent.Register<IRecipe> event){
 		IForgeRegistry<IRecipe> registry = event.getRegistry();
+		registry.register(new ShapedOreRecipe(ItemUtil.sSwordS.getRegistryName(), new ItemStack(ItemUtil.sSwordS,1),
+				"AWW",
+				"LSW",
+				"GWW",
+				'S',new ItemStack(Items.SHIELD),
+				'W',"plankWood",
+				'A',new ItemStack(Items.STONE_AXE),
+				'L',"leather",
+				'G',"ingotGold").setRegistryName(ItemUtil.sSwordS.getRegistryName()));
+
 		registry.register(new ShapedOreRecipe(ItemUtil.sSwordM.getRegistryName(), new ItemStack(ItemUtil.sSwordM,1),
 				"BII",
 				"DSI",
 				"LII",
 				'S',new ItemStack(Items.SHIELD),
-				'I',new ItemStack(Items.IRON_INGOT),
+				'I',"ingotIron",
 				'B',new ItemStack(Items.IRON_SWORD),
-				'D',new ItemStack(Items.DIAMOND),
-				'L',new ItemStack(Blocks.LAPIS_BLOCK)).setRegistryName(ItemUtil.sSwordM.getRegistryName()));
+				'D',"gemDiamond",
+				'L',"blockLapis").setRegistryName(ItemUtil.sSwordM.getRegistryName()));
 	}
 }

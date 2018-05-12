@@ -22,16 +22,9 @@ public class CombatEvent {
 					EntityPlayer player = (EntityPlayer) living;
 					if(!player.getHeldItemMainhand().isEmpty()&&player.getHeldItemOffhand().getItem() instanceof IShieldAbstract){
 						IShieldAbstract shield=(IShieldAbstract)player.getHeldItemOffhand().getItem();
-						if(source.isProjectile()&&shield.getProjectileReflect()){
-							prev=0F;
-							if(!player.world.isRemote){
-								((WorldServer)player.world).spawnParticle(EnumParticleTypes.CRIT_MAGIC, player.posX, player.posY+1.5, player.posZ, 15, 0.2D, 0.2D, 0.2D, 0.0D);
-							}
-						}else{
-							prev=shield.getDecay();
-							if(!player.world.isRemote){
-								((WorldServer)player.world).spawnParticle(EnumParticleTypes.CRIT, player.posX, player.posY+1.5, player.posZ, 15, 0.2D, 0.2D, 0.2D, 0.0D);
-							}
+						prev=shield.getDecay();
+						if(!player.world.isRemote){
+							((WorldServer)player.world).spawnParticle(EnumParticleTypes.CRIT, player.posX, player.posY+1.5, player.posZ, 15, 0.2D, 0.2D, 0.2D, 0.0D);
 						}
 					}
 				}

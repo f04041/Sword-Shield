@@ -1,5 +1,6 @@
 package f04041.swordshield.item.abstractItem;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -13,7 +14,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
@@ -21,8 +24,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,14 +38,16 @@ abstract public class ISwordAbstract extends ItemSword{
 	private int key=0;
 	private float attackDamage;
 	private double attackSpeed=-2.4000000953674316D;
-	public ISwordAbstract(ToolMaterial material,double attackSpeed)
-    {
-        super(material);
-        this.maxStackSize = 1;
+	private boolean hurtRes = false;
+	private double areaOfEffect=0.0D;
+	public ISwordAbstract(ToolMaterial material,double attackSpeed,boolean hurtRes,double areaOfEffect){
+		super(material);
+		this.maxStackSize = 1;
         this.setMaxDamage(material.getMaxUses()+500);
         this.attackSpeed=attackSpeed;
-        this.addPropertyOverride(new ResourceLocation("hand"), new IItemPropertyGetter()
-        {
+        this.hurtRes=hurtRes;
+        this.areaOfEffect=areaOfEffect;
+        this.addPropertyOverride(new ResourceLocation("hand"), new IItemPropertyGetter(){
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
@@ -66,7 +73,7 @@ abstract public class ISwordAbstract extends ItemSword{
 
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
         {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.attackDamage, 0));
+        	multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.attackDamage, 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeed, 0));
         }
 
@@ -122,5 +129,25 @@ abstract public class ISwordAbstract extends ItemSword{
 				}
 			}
 		}
+	}
+	@Override
+	public boolean onLeftClickEntity( ItemStack stack,  EntityPlayer player, Entity entity) {
+		if(hurtRes) {
+			entity.hurtResistantTime = 0;
+		}
+		if(areaOfEffect!=0.0D) {
+			if(player.getCooledAttackStrength(0.5F) >= 0.95F){
+				List<EntityLivingBase> entities = player.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, entity.getEntityBoundingBox().grow(areaOfEffect, 0.25D, areaOfEffect));
+				for(EntityLivingBase aoeEntity : entities) {
+					if(aoeEntity != player && aoeEntity != entity && !player.isOnSameTeam(entity)&&(aoeEntity instanceof IMob)) {
+						aoeEntity.knockBack(player, 0.4F, (double) MathHelper.sin(player.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(player.rotationYaw * 0.017453292F)));
+						aoeEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), attackDamage);
+					}
+				}
+				player.getEntityWorld().playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.getSoundCategory(), 1.0F, 1.0F);
+				player.spawnSweepParticles();
+			}
+		}
+		return super.onLeftClickEntity(stack, player, entity);
 	}
 }

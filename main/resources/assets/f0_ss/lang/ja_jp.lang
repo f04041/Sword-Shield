@@ -1,3 +1,5 @@
 ## item
-item.f0_ss.sshieldm.name=盾
-item.f0_ss.sswordm.name=剣盾
+item.f0_ss.sshields.name=ラウンドシールド
+item.f0_ss.sswords.name=トマホーク&ラウンドシールド
+item.f0_ss.sshieldm.name=カイトシールド
+item.f0_ss.sswordm.name=ショートソード&カイトシールド
