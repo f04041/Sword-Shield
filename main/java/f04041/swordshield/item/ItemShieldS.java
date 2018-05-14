@@ -24,14 +24,14 @@ public class ItemShieldS extends IShieldAbstract{
 			if(!nbtShield.hasKey("reflect")||nbtShield.getBoolean("reflect")){
 				super.setProjectileReflect(stack, false);
 			}
-			IAttributeInstance attributeInstanceMS = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+			IAttributeInstance attributeInstanceMSF = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			if(player != null && player.isHandActive() && player.getActiveItemStack() .equals(player.getHeldItemOffhand()) ) {
-				if(attributeInstanceMS.getModifier(UuidStore.UUID_MSF)==null) {
-					attributeInstanceMS.applyModifier(new AttributeModifier(UuidStore.UUID_MSF, "speed boost",0.5D, 0));
+				if(attributeInstanceMSF.getModifier(UuidStore.UUID_MSF)==null) {
+					attributeInstanceMSF.applyModifier(new AttributeModifier(UuidStore.UUID_MSF, "speed boost",0.5D, 0));
 				}
 			}else {
-				if(attributeInstanceMS.getModifier(UuidStore.UUID_MSF)!=null) {
-					attributeInstanceMS.removeModifier(UuidStore.UUID_MSF);
+				if(attributeInstanceMSF.getModifier(UuidStore.UUID_MSF)!=null) {
+					attributeInstanceMSF.removeModifier(UuidStore.UUID_MSF);
 				}
 			}
 		}

@@ -12,5 +12,7 @@ public class RegistrationUtil {
 		registry.register(ItemUtil.sShieldS);
 		registry.register(ItemUtil.sShieldM);
 		registry.register(ItemUtil.sSwordM);
+		registry.register(ItemUtil.sShieldL);
+		registry.register(ItemUtil.sSwordL);
 	}
 }

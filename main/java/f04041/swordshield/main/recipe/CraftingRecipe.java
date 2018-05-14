@@ -32,5 +32,16 @@ public class CraftingRecipe {
 				'B',new ItemStack(Items.IRON_SWORD),
 				'D',"gemDiamond",
 				'L',"blockLapis").setRegistryName(ItemUtil.sSwordM.getRegistryName()));
+
+		registry.register(new ShapedOreRecipe(ItemUtil.sSwordL.getRegistryName(), new ItemStack(ItemUtil.sSwordL,1),
+				"BDD",
+				"ESD",
+				"RDD",
+				'S',new ItemStack(Items.SHIELD),
+				'E',"gemEmerald",
+				'B',new ItemStack(Items.DIAMOND_SWORD),
+				'D',"gemDiamond",
+				'R',"blockRedstone").setRegistryName(ItemUtil.sSwordL.getRegistryName()));
 	}
+
 }

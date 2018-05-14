@@ -13,5 +13,7 @@ public class ModelRegistrationUtil {
 		ModelLoader.setCustomModelResourceLocation(ItemUtil.sShieldS, 0, new ModelResourceLocation(SwordShield.MOD_ID+":"+"sshields", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ItemUtil.sSwordM, 0, new ModelResourceLocation(SwordShield.MOD_ID+":"+"sswordm", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ItemUtil.sShieldM, 0, new ModelResourceLocation(SwordShield.MOD_ID+":"+"sshieldm", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(ItemUtil.sSwordL, 0, new ModelResourceLocation(SwordShield.MOD_ID+":"+"sswordl", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(ItemUtil.sShieldL, 0, new ModelResourceLocation(SwordShield.MOD_ID+":"+"sshieldl", "inventory"));
 	}
 }

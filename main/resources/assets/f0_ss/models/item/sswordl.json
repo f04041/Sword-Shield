@@ -1,0 +1,14 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "f0_ss:item/ssl"
+    },
+    "overrides": [
+                  {
+                      "predicate": {
+                          "hand": 1
+                      },
+                      "model":"f0_ss:item/sswordlh"
+                  }
+              ]
+}

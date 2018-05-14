@@ -1,7 +1,9 @@
 package f04041.swordshield.utils;
 
+import f04041.swordshield.item.ItemShieldL;
 import f04041.swordshield.item.ItemShieldM;
 import f04041.swordshield.item.ItemShieldS;
+import f04041.swordshield.item.ItemSwordShieldL;
 import f04041.swordshield.item.ItemSwordShieldM;
 import f04041.swordshield.item.ItemSwordShieldS;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,6 +15,8 @@ public class ItemUtil {
 	public static Item sSwordS;
 	public static Item sShieldM;
 	public static Item sSwordM;
+	public static Item sShieldL;
+	public static Item sSwordL;
 	public static void init(){
 		sSwordS=new ItemSwordShieldS(ToolMaterial.STONE)
 				.setUnlocalizedName("f0_ss.sswords")
@@ -32,9 +36,20 @@ public class ItemUtil {
 				.setUnlocalizedName("f0_ss.sshieldm")
 				.setRegistryName("f0_ss.sshieldm")
 				.setMaxStackSize(1);
+		sSwordL = new ItemSwordShieldL(ToolMaterial.DIAMOND)
+				.setUnlocalizedName("f0_ss.sswordl")
+				.setRegistryName("f0_ss.sswordl")
+				.setMaxStackSize(1)
+				.setCreativeTab(CreativeTabs.COMBAT);
+		sShieldL = new ItemShieldL(ToolMaterial.DIAMOND)
+				.setUnlocalizedName("f0_ss.sshieldl")
+				.setRegistryName("f0_ss.sshieldl")
+				.setMaxStackSize(1);
 		((ItemSwordShieldS)sSwordS).setShield(sShieldS);
 		((ItemShieldS)sShieldS).setSwordShield(sSwordS, sShieldS);
 		((ItemSwordShieldM)sSwordM).setShield(sShieldM);
 		((ItemShieldM)sShieldM).setSwordShield(sSwordM, sShieldM);
+		((ItemSwordShieldL)sSwordL).setShield(sShieldL);
+		((ItemShieldL)sShieldL).setSwordShield(sSwordL, sShieldL);
 	}
 }

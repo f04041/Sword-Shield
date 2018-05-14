@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = "f0_ss",
 	name = "Sword&Shield",
-	version = "0.2.0",
+	version = "1.0.0",
 	dependencies = "required-after:forge",
 	acceptedMinecraftVersions = "[1.12,1.12.2]",
 	useMetadata = true)
